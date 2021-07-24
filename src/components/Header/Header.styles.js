@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { Heading } from 'arwes';
+import { Header } from 'arwes';
 
-const HeadingCenter = styled(Heading)`
+const HeaderCenter = styled(Header)`
   text-align: center;
+  height: 110px;
 `;
 
-export { HeadingCenter };
+export { HeaderCenter };
