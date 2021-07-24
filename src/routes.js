@@ -6,6 +6,7 @@ import Background from './images/background.jpg'
 import Glow from './images/glow.png'
 
 import Header from './components/Header/Header';
+import Container from './components/Container/Container';
 import CreateNote from './pages/CreateNote/CreateNote';
 
 const theme = createTheme({
@@ -17,11 +18,13 @@ const theme = createTheme({
 const Routes = () => {
   return(
     <ThemeProvider animate theme={theme}>
-      <Arwes animate background={Background} pattern={Glow}>
+      <Arwes animate background={Background} pattern={Glow} >
         <Header />
-        <Router>
-          <Route exact path="/" component={CreateNote} />
-        </Router>
+        <Container>
+          <Router>
+            <Route exact path="/" component={CreateNote} />
+          </Router>
+        </Container>
       </Arwes>
     </ThemeProvider>
   );
