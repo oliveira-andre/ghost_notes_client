@@ -8,6 +8,7 @@ import Glow from './images/glow.png'
 import Header from './components/Header/Header';
 import Container from './components/Container/Container';
 import CreateNote from './pages/CreateNote/CreateNote';
+import ShowNote from './pages/ShowNote/ShowNote';
 
 const theme = createTheme({
   color: {
@@ -23,6 +24,7 @@ const Routes = () => {
         <Container>
           <Router>
             <Route exact path="/" component={CreateNote} />
+            <Route exact path="/notes/:slug" component={ShowNote} />
           </Router>
         </Container>
       </Arwes>
