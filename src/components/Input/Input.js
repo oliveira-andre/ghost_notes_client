@@ -7,12 +7,14 @@ const Input = (props) => {
   const {
     height,
     onChange,
+    disabled,
   } = props;
 
   return(
     <CustomInput
       height={height}
       onChange={onChange}
+      disabled={disabled}
     />
   );
 }
@@ -20,6 +22,7 @@ const Input = (props) => {
 Input.propTypes = {
   height: PropTypes.number.isRequired,
   onChange: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 Input.defaultProps = {
