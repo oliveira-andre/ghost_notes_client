@@ -3,6 +3,7 @@ import { Words } from 'arwes';
 import { Redirect } from 'react-router-dom';
 
 import { SubmitButton } from './CreateNote.styles';
+import NotesService from '../../services/notes';
 
 import encrypt from '../../components/utils/encrypt';
 import TextArea from '../../components/TextArea/TextArea';
@@ -12,15 +13,19 @@ const CreateNote = () => {
   const [body, setBody] = useState('');
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
+  const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
 
-  const createNote = (e) => {
+  const createNote = async (e) => {
     e.preventDefault();
 
-    // TODO: connect with api
-    console.log({ body: body, title: title })
-    setSlug('safe')
-    //setRedirect(true)
+    const params = { body: body, title: title, password: password };
+    const response = await NotesService.create(params);
+
+    if (response.status === 201) {
+      setSlug(response.data.slug);
+      setRedirect(true);
+    }
   }
 
   return(
@@ -34,7 +39,7 @@ const CreateNote = () => {
           <Input onChange={(e) => { setTitle(e.target.value) }} value={title} />
 
           <label><Words animate>Password</Words></label>
-          <Input onChange={(e) => { setTitle(e.target.value) }} value={title} />
+          <Input onChange={(e) => { setPassword(e.target.value) }} value={password} />
 
           <SubmitButton animate layer='success' type='submit'>
             Save
