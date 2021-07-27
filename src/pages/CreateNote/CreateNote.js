@@ -19,7 +19,14 @@ const CreateNote = () => {
   const createNote = async (e) => {
     e.preventDefault();
 
-    const params = { body: body, title: title, password: password };
+    let params;
+
+    if (password === '' || password === null) {
+      params = { body: body, title: title };
+    } else {
+      params = { body: body, title: title, password: password };
+    }
+
     const response = await NotesService.create(params);
 
     if (response.status === 201) {
