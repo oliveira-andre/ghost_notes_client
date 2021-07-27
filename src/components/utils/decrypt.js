@@ -4,7 +4,7 @@ const loadPrivateKey = async () => {
   const currentPrivateKey = localStorage.getItem('key');
   const privateKey = await openpgp.decryptKey({
     privateKey: await openpgp.readPrivateKey({ armoredKey: currentPrivateKey }),
-    passphrase: 'super long and hard to guess secret'
+    passphrase: process.env.SECRET_KEY,
   });
 
   return privateKey;
