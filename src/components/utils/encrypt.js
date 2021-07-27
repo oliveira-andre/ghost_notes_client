@@ -1,8 +1,7 @@
-
 import * as openpgp from 'openpgp';
 
 const loadPublicKey = async () => {
-  const oldPublicKey = localStorage.getItem('key');
+  const oldPublicKey = localStorage.getItem('publicKey');
   let  currentPublicKey;
 
   if (oldPublicKey === null || oldPublicKey === '') {
@@ -14,7 +13,8 @@ const loadPublicKey = async () => {
       format: 'armored'
     });
     
-    localStorage.setItem('key', publicKey);
+    localStorage.setItem('key', privateKey);
+    localStorage.setItem('publicKey', publicKey);
     currentPublicKey = publicKey;
   } else {
     currentPublicKey = oldPublicKey;
