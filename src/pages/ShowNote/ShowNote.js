@@ -16,9 +16,13 @@ const ShowNote = () => {
 
   useEffect(() => {
     setInputFile(document.getElementById("input-file"));
-    setPrivateKey(localStorage.getItem('key'));
+
+    if (privateKey !== localStorage.getItem('key')) {
+      setPrivateKey(localStorage.getItem('key'));
+    }
+
     loadNote();
-  }, []);
+  }, [privateKey]);
 
   const loadNote = async() => {
     const response = await NotesService.show(slug);
@@ -41,7 +45,7 @@ const ShowNote = () => {
 
     reader.onload = async (e) => { 
       const text = (e.target.result);
-      
+
       if (text !== '' && text !== null) {
         localStorage.setItem('key', text);
         setPrivateKey(localStorage.getItem('key'));
