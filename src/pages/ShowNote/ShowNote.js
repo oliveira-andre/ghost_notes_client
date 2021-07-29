@@ -31,7 +31,7 @@ const ShowNote = () => {
       setTitle(response.data.title);
       setBody(response.data.body);
 
-      decrypt(body, setBody);
+      decrypt(response.data.body, setBody);
     }
   };
 
@@ -63,7 +63,7 @@ const ShowNote = () => {
   };
 
   const cleanKey = () => {
-    localStorage.removeItem('key');
+    localStorage.clear();
     setPrivateKey(localStorage.getItem('key'));
   };
 
