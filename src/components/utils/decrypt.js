@@ -1,18 +1,16 @@
 import * as openpgp from 'openpgp';
-import dotenv from 'dotenv';
 
 const loadPrivateKey = async () => {
   const currentPrivateKey = `${localStorage.getItem('key')}`;
   let privateKey;
   const readedPrivateKey = await openpgp.readPrivateKey({ armoredKey: currentPrivateKey });
-  console.log(dotenv.config())
 
   if (currentPrivateKey) {
     try {
-    privateKey = await openpgp.decryptKey({
-      privateKey: readedPrivateKey,
-      passphrase: process.env.SECRET_KEY,
-    });
+      privateKey = await openpgp.decryptKey({
+        privateKey: readedPrivateKey,
+        passphrase: process.env.REACT_APP_SECRET_KEY,
+      });
     } catch {
       privateKey = readedPrivateKey;
     }
@@ -27,7 +25,7 @@ const decrypt = async(message, setMessage) => {
   if (privateKey !== null && privateKey !== undefined && privateKey !== '') {
     const encryptedAndSignedMessage = message;
 
-    const currentMessage = await openpgp.readMessage({ armoredMessage: encryptedAndSignedMessage });
+    const currentMessage = await openpgp.readMessage({ armoredMessage: `${encryptedAndSignedMessage}` });
 
     const { data: decrypted } = await openpgp.decrypt({
       message: currentMessage,

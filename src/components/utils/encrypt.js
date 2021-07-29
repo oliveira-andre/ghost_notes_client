@@ -9,7 +9,7 @@ const loadPublicKey = async () => {
       type: 'ecc',
       curve: 'curve25519',
       userIDs: [{ name: 'Anonymous', email: 'root@anonymous.com' }],
-      passphrase: process.env.SECRET_KEY,
+      passphrase: process.env.REACT_APP_SECRET_KEY,
       format: 'armored'
     });
     
