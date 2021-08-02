@@ -5,7 +5,7 @@ const loadPublicKey = async () => {
   let  currentPublicKey;
 
   if (oldPublicKey === null || oldPublicKey === '') {
-    const { privateKey, publicKey, revocationCertificate } = await openpgp.generateKey({
+    const { privateKey, publicKey } = await openpgp.generateKey({
       type: 'ecc',
       curve: 'curve25519',
       userIDs: [{ name: 'Anonymous', email: 'root@anonymous.com' }],
