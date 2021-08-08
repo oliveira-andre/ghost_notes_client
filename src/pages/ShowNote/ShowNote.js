@@ -25,23 +25,23 @@ const ShowNote = () => {
       setPrivateKey(localStorage.getItem('key'));
     }
 
-    loadNote();
-  }, [privateKey]);
+    const loadNote = async() => {
+      try {
+        const response = await NotesService.show(slug);
 
-  const loadNote = async() => {
-    try {
-      const response = await NotesService.show(slug);
+        if (response.status === 200) {
+          setTitle(response.data.title);
+          setBody(response.data.body);
 
-      if (response.status === 200) {
-        setTitle(response.data.title);
-        setBody(response.data.body);
-
-        decrypt(response.data.body, setBody);
+          decrypt(response.data.body, setBody);
+        }
+      } catch {
+        setShowModal(true);
       }
-    } catch {
-      setShowModal(true);
-    }
-  };
+    };
+
+    loadNote();
+  }, [privateKey, slug]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
